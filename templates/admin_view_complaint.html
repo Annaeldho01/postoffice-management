@@ -1,0 +1,94 @@
+{% include 'admin_header.html' %}
+
+<div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>COMPLAINTS</h4>
+            <img src="/static/assets/images/heading-line-dec.png" alt="">
+
+            <center>
+
+                <form method="post">
+                    <table style="width: 500px;" class="table" >
+                        <tr>
+                            <td><input type="date" class="form-control" required="" placeholder="Form date" name="Form_date"></td>
+                            <td><input type="date" class="form-control" required="" placeholder="To date" name="To_date"></td>
+                            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="submitbuttonc"></td>
+                        </tr>
+                    </table>
+                </form>
+            </center>
+
+
+<center>
+{% if data['reply'] %}
+<form method="post">
+	<table class="table" style="width: 500px;">
+		<tr>
+			<th>Reply</th>
+			<td><input type="text" class="form-control" required="" name="reply"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" class="btn btn-success" name="submitbutton"></td>
+		</tr>
+	</table>
+</form>
+{% else %}  
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search complaints...">
+</div>
+
+<table class="table table-bordered text-center" id="feedbackTable">
+    <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Complaint</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Reply</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in data['view_complaint'] %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['complaint'] }}</td>
+            <td>{{ i['firstname'] }} {{ i['lastname'] }}</td>
+            <td>{{ i['date'] }}</td>
+            {% if i['reply'] == 'move_to_sub_office' %}
+            <td><a class="btn btn-success" href="?action=reply&complaint_id={{ i['complaint_id'] }}">REPLY</a></td>
+            {% else %}
+            <td>{{ i['reply'] }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</center>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let table = document.getElementById("complaintsTable");
+        let rows = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header
+            let complaintText = rows[i].getElementsByTagName("td")[1]?.textContent.toLowerCase() || "";
+            if (complaintText.includes(filter)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    });
+</script>
+
+{% include 'footer.html' %}

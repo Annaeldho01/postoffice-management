@@ -1,0 +1,40 @@
+{% include 'admin_header.html' %}
+<div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>User's</h4>
+            <img src="/static/assets/images/heading-line-dec.png" alt="">
+<center>
+
+    <table class="table">
+        <tr>
+            <th>Sl No</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Service</th>
+            <th>Withdraw Request</th>
+        </tr>
+        {% for i in data['user_view'] %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['firstname']}} {{i['lastname']}}</td>
+            <td>{{i['city']}}</td>
+            <td>{{i['phone']}}</td>
+            <td>{{i['email']}}</td>
+            <td><a href="/admin_view_user_active_plan?user_id={{i['user_id']}}" class="btn btn-danger">Services</a></td>
+            <td><a href="/admin_view_transactions?user_id={{i['user_id']}}" class="btn btn-danger">Transactions</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</center>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% include 'footer.html' %}

@@ -1,0 +1,47 @@
+{% include 'admin_header.html' %}
+
+
+<div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>Transaction</h4> 
+            <img src="/static/assets/images/heading-line-dec.png" alt="">
+
+            <center>
+
+                <table class="table">
+                    <tr>
+                        <th>SlNo</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for i in data['view_Deposit'] %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i['service_amount']}}</td>
+                        <td>{{i['date']}}</td>
+                        <td>Deposit</td>
+                    </tr>
+                    {% endfor %}
+                    {% for i in data['view_withdraw'] %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i['withdraw_amount']}}</td>
+                        <td>{{i['withdraw_date']}}</td>
+                        <td>Withdraw</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </center>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% include 'footer.html' %}

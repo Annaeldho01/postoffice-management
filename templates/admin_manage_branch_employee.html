@@ -1,0 +1,116 @@
+{% include 'admin_header.html' %}
+
+<div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>Manage Branch Employee</h4>
+            <img src="/static/assets/images/heading-line-dec.png" alt="">
+            <center>
+                {% if data['up'] %}
+                <form method="post">
+                    <table style="width: 500px;">
+                        <tr>
+                            <th>First Name</th>
+                            <td><input type="text" class="form-control" value="{{data['up'][0]['firstname']}}" required name="firstname" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th>
+                            <td><input type="text" class="form-control" value="{{data['up'][0]['lastname']}}" required name="lastname" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td><input type="text" class="form-control" value="{{data['up'][0]['city']}}" required name="city" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td><input type="text" class="form-control" value="{{data['up'][0]['phone']}}" required pattern="[0-9]{10}" maxlength="10" name="phone" title="Enter a valid 10-digit phone number"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" class="form-control" value="{{data['up'][0]['email']}}" required name="email"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="update"></td>
+                        </tr>
+                    </table>
+                </form>
+                {% else %}
+                <form method="post">
+                    <table style="width: 500px;">
+                        <tr>
+                            <th>First Name</th>
+                            <td><input type="text" class="form-control" required name="firstname" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th>
+                            <td><input type="text" class="form-control" required name="lastname" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td><input type="text" class="form-control" required name="city" pattern="[A-Za-z\s]+" title="Only alphabets are allowed"></td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td><input type="text" class="form-control" required pattern="[0-9]{10}" maxlength="10" name="phone" title="Enter a valid 10-digit phone number"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" class="form-control" required name="email"></td>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <td><input type="text" class="form-control" required name="username"></td>
+                        </tr>
+                        <tr>
+                            <th>Password</th>
+                            <td>
+                                <input 
+                                    type="password" 
+                                    class="form-control" 
+                                    required 
+                                    name="password" 
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$" 
+                                    title="Password must be at least 7 characters long, with at least one uppercase letter, one lowercase letter, one digit, and one special character."
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="submitbutton"></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <table class="table">
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for i in data['user_view'] %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i['firstname']}} {{i['lastname']}}</td>
+                        <td>{{i['city']}}</td>
+                        <td>{{i['phone']}}</td>
+                        <td>{{i['email']}}</td>
+                        <td>
+                            <a href="?action=delete&branch_employee_id={{i['branch_employee_id']}}&login_id={{i['login_id']}}" class="btn btn-danger">DELETE</a>
+                            <a href="?action=update&branch_employee_id={{i['branch_employee_id']}}&login_id={{i['login_id']}}" class="btn btn-primary">UPDATE</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
