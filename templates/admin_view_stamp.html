@@ -1,0 +1,89 @@
+{% include 'admin_header.html' %}
+
+<div id="services" class="services section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="section-heading wow fadeInDown text-center" data-wow-duration="1s" data-wow-delay="0.5s">
+          <h4>Stamp Collection</h4>
+          <img src="/static/assets/images/heading-line-dec.png" alt="" class="centered-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Centers the items -->
+      {% for i in data['view'] %}
+      <div class="col-lg-4 col-md-6 mb-4"> <!-- Responsive grid -->
+        <div class="stamp-card">
+          <div class="stamp-image">
+            <img src="{{ i['image'] }}" alt="Stamp Image">
+          </div>
+          <h4 class="stamp-title">{{ i['stamp_name'] }}</h4>
+          <p class="stamp-desc">{{ i['description'] }}</p>
+          <p><strong>Price:</strong> ₹{{ i['price'] }}</p>
+          <p><strong>Quantity Available:</strong> {{ i['quantity'] }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %}
+
+<style>
+  /* Container Spacing */
+  .container {
+    padding: 30px 0;
+  }
+
+  /* Stamp Card Styling */
+  .stamp-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+  }
+
+  .stamp-card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Image Styling */
+  .stamp-image img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  /* Title & Description */
+  .stamp-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
+
+  .stamp-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  /* Heading Styling */
+  .text-center {
+    text-align: center;
+  }
+
+  .centered-img {
+    display: block;
+    margin: 10px auto;
+  }
+</style>

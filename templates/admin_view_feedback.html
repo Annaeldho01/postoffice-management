@@ -1,0 +1,82 @@
+{% include 'admin_header.html' %}
+
+<div id="services" class="services section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="section-heading wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <h4>FEEDBACK</h4>
+                    <img src="/static/assets/images/heading-line-dec.png" alt="">
+
+                    <center>
+
+                        <form method="post">
+                            <table style="width: 500px;" class="table" >
+                                <tr>
+                                    <td><input type="date" class="form-control" required="" placeholder="Form date" name="Form_date"></td>
+                                    <td><input type="date" class="form-control" required="" placeholder="To date" name="To_date"></td>
+                                    <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="submitbutton"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </center>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-10">
+                <div class="card shadow-lg p-4" style="border-radius: 10px;">
+                    
+                    <div class="mb-3">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search feedback...">
+                    </div>
+                    
+                    <table class="table table-bordered text-center" id="feedbackTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>User</th>
+                                <th>Feedback</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data['view'] %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ i['firstname'] }} {{ i['lastname'] }}</td>
+                                <td>{{ i['feedback'] }}</td>
+                                <td>{{ i['date'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#feedbackTable tbody tr");
+        
+        rows.forEach(row => {
+            let feedbackText = row.cells[1].textContent.toLowerCase();
+            if (feedbackText.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+
+{% include 'footer.html' %}

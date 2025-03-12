@@ -1,0 +1,35 @@
+{% include 'admin_header.html' %}
+
+
+<div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>Services</h4>
+            <img src="/static/assets/images/heading-line-dec.png" alt="">
+
+            <center>
+            </center>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+      {% for i in data['view'] %}
+        <div class="col-lg-3">
+          <div class="service-item fourth-service">
+            <h4>{{i['service_name']}}</h4>
+            <p>{{i['description']}}</p>
+            <p>Lorem ipsum dolor consectetur adipiscing elit sedder williamsburg photo booth quinoa and fashion axe.</p>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+{% include 'footer.html' %}
